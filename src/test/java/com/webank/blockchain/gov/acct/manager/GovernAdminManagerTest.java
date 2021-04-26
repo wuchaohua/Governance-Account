@@ -13,12 +13,13 @@
  */
 package com.webank.blockchain.gov.acct.manager;
 
-import com.webank.blockchain.gov.acct.BaseTests;
-import com.webank.blockchain.gov.acct.contract.AdminGovernBuilder;
-import com.webank.blockchain.gov.acct.contract.WEGovernance;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.webank.blockchain.gov.acct.BaseTests;
+import com.webank.blockchain.gov.acct.contract.AdminGovernBuilder;
+import com.webank.blockchain.gov.acct.contract.WEGovernance;
 
 /**
  * GovernAdminManagerTest @Description: GovernAdminManagerTest
@@ -27,7 +28,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @data Feb 21, 2020 8:49:25 PM
  */
 public class GovernAdminManagerTest extends BaseTests {
-    @Autowired private GovernContractInitializer manager;
+    @Autowired
+    private GovernContractInitializer manager;
 
     @Test
     // create govern account of admin by user
@@ -38,4 +40,5 @@ public class GovernAdminManagerTest extends BaseTests {
         System.out.println(govern.getContractAddress());
         Assertions.assertNotNull(govern);
     }
+
 }
