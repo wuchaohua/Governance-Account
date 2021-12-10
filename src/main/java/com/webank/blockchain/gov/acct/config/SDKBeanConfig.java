@@ -88,17 +88,23 @@ public class SDKBeanConfig {
     }
 
     @Bean
-    @ConditionalOnProperty(name = "system.defaultGovernanceEnabled", havingValue = "true")
+    //@ConditionalOnProperty(name = "system.defaultGovernanceEnabled", havingValue = "true")
     public WEGovernance getGovernance(
             @Autowired Client client, @Autowired CryptoKeyPair cryptoKeyPair) throws Exception {
-        WEGovernance governance =
-                WEGovernance.deploy(client, cryptoKeyPair, AccountConstants.ADMIN_MODE);
-        log.info("Default governance acct create succeed {} ", governance.getContractAddress());
+        WEGovernance governance;
+        if (StringUtils.isEmpty(systemEnvironmentConfig.getGovernContractAddress())) {
+            governance = WEGovernance.deploy(client, cryptoKeyPair, AccountConstants.ADMIN_MODE);
+            log.info("Default governance acct create succeed {} ", governance.getContractAddress());
+        } else {
+            governance = WEGovernance.load(systemEnvironmentConfig.getGovernContractAddress(), client, cryptoKeyPair);
+            log.info("Default governance acct load succeed {} ", governance.getContractAddress());
+        }
+
         return governance;
     }
 
     @Bean
-    @ConditionalOnProperty(name = "system.defaultGovernanceEnabled", havingValue = "true")
+    //@ConditionalOnProperty(name = "system.defaultGovernanceEnabled", havingValue = "true")
     public AccountManager getAccountManager(
             @Autowired WEGovernance weGovernance,
             @Autowired Client client,

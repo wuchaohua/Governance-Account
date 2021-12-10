@@ -32,4 +32,5 @@ public class SystemEnvironmentConfig {
     private String configPath;
     private String hexPrivateKey;
     private boolean defaultGovernanceEnabled = false;
+    private String governContractAddress;
 }
